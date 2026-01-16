@@ -1,7 +1,5 @@
-import { createTheme } from '@vanilla-extract/css'
-
-// 색상 팔레트
-export const colors = {
+// 라이트 모드 색상 팔레트
+export const lightColors = {
   // Primary
   primary: '#2563eb',
   primaryDark: '#1e40af',
@@ -40,6 +38,56 @@ export const colors = {
   textPrimary: '#111827',
   textSecondary: '#6b7280',
   textTertiary: '#9ca3af',
+}
+
+// 다크 모드 색상 팔레트
+export const darkColors = {
+  // Primary
+  primary: '#3b82f6',
+  primaryDark: '#2563eb',
+  primaryLight: '#60a5fa',
+  
+  // Secondary
+  secondary: '#94a3b8',
+  secondaryDark: '#64748b',
+  secondaryLight: '#cbd5e1',
+  
+  // 상태 색상
+  success: '#10b981',
+  warning: '#f59e0b',
+  error: '#ef4444',
+  info: '#3b82f6',
+  
+  // 중성 색상
+  white: '#1f2937',
+  black: '#ffffff',
+  gray50: '#111827',
+  gray100: '#1f2937',
+  gray200: '#374151',
+  gray300: '#4b5563',
+  gray400: '#6b7280',
+  gray500: '#9ca3af',
+  gray600: '#d1d5db',
+  gray700: '#e5e7eb',
+  gray800: '#f3f4f6',
+  gray900: '#f9fafb',
+  
+  // 배경
+  background: '#111827',
+  backgroundSecondary: '#1f2937',
+  
+  // 텍스트
+  textPrimary: '#f9fafb',
+  textSecondary: '#d1d5db',
+  textTertiary: '#9ca3af',
+}
+
+// 기본 색상 (라이트 모드)
+export const colors = lightColors
+
+// 테마에 따른 색상 반환 함수
+export const getColors = (isDark: boolean) => {
+  return isDark ? darkColors : lightColors
 }
 
 // 타이포그래피
@@ -118,12 +166,3 @@ export const breakpoints = {
   '2xl': '1536px',
 }
 
-// 테마 생성
-export const theme = createTheme({
-  colors,
-  typography,
-  spacing,
-  borderRadius,
-  shadow,
-  breakpoints,
-})

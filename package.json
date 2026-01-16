@@ -10,12 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.56.2",
+    "@vanilla-extract/css": "^1.15.1",
+    "@vanilla-extract/vite-plugin": "^5.1.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "@tanstack/react-query": "^5.56.2",
-    "zustand": "^4.5.5",
-    "@vanilla-extract/css": "^1.15.1",
-    "@vanilla-extract/vite-plugin": "^5.1.4"
+    "react-router-dom": "^7.12.0",
+    "zustand": "^4.5.5"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
