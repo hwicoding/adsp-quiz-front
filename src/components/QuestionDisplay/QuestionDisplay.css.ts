@@ -32,9 +32,8 @@ export const submitButton = style({
     cursor: 'not-allowed',
     backgroundColor: colors.primary,
   },
-  // @ts-expect-error - Vanilla Extract supports :global() selector
-
-  ':global(.dark) &': {
+  selectors: {
+    '.dark &': {
     backgroundColor: darkColors.primary,
     ':hover': {
       backgroundColor: darkColors.primaryDark,
@@ -43,4 +42,5 @@ export const submitButton = style({
       backgroundColor: darkColors.primary,
     },
   },
-})
+
+  },})

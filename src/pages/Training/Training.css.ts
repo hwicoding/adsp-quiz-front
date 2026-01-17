@@ -21,10 +21,10 @@ export const header = style({
   paddingBottom: spacing[4],
   borderBottom: `1px solid ${colors.gray200}`,
   transition: 'border-color 0.3s ease',
-  // @ts-expect-error - Vanilla Extract supports :global() selector
-
-  ':global(.dark) &': {
-    borderBottomColor: darkColors.gray700,
+  selectors: {
+    '.dark &': {
+      borderBottomColor: darkColors.gray700,
+    },
   },
   '@media': {
     [`screen and (max-width: ${breakpoints.md})`]: {
@@ -42,10 +42,10 @@ export const title = style({
   color: colors.textPrimary,
   margin: 0,
   transition: 'color 0.3s ease',
-  // @ts-expect-error - Vanilla Extract supports :global() selector
-
-  ':global(.dark) &': {
-    color: darkColors.textPrimary,
+  selectors: {
+    '.dark &': {
+      color: darkColors.textPrimary,
+    },
   },
   '@media': {
     [`screen and (max-width: ${breakpoints.md})`]: {
@@ -59,10 +59,10 @@ export const progress = style({
   color: colors.textSecondary,
   fontWeight: typography.fontWeight.medium,
   transition: 'color 0.3s ease',
-  // @ts-expect-error - Vanilla Extract supports :global() selector
-
-  ':global(.dark) &': {
-    color: darkColors.textSecondary,
+  selectors: {
+    '.dark &': {
+      color: darkColors.textSecondary,
+    },
   },
 })
 
@@ -76,10 +76,10 @@ export const footer = style({
   paddingTop: spacing[6],
   borderTop: `1px solid ${colors.gray200}`,
   transition: 'border-color 0.3s ease',
-  // @ts-expect-error - Vanilla Extract supports :global() selector
-
-  ':global(.dark) &': {
-    borderTopColor: darkColors.gray700,
+  selectors: {
+    '.dark &': {
+      borderTopColor: darkColors.gray700,
+    },
   },
 })
 
@@ -96,11 +96,11 @@ export const nextButton = style({
   ':hover': {
     backgroundColor: colors.primaryDark,
   },
-  // @ts-expect-error - Vanilla Extract supports :global() selector
-
-  ':global(.dark) &': {
-    backgroundColor: darkColors.primary,
-    ':hover': {
+  selectors: {
+    '.dark &': {
+      backgroundColor: darkColors.primary,
+    },
+    '.dark &:hover': {
       backgroundColor: darkColors.primaryDark,
     },
   },

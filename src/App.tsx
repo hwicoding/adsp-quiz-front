@@ -71,6 +71,7 @@ const Navigation = () => {
 function App() {
   const { resolvedTheme } = useThemeStore()
 
+  // 테마 변경 시 DOM에 적용
   useEffect(() => {
     const root = document.documentElement
     if (resolvedTheme === 'dark') {

@@ -45,14 +45,15 @@ export const useThemeStore = create<ThemeState>()(
         }
       },
       toggleTheme: () => {
-        const store = get()
-        const currentResolved = store.resolvedTheme
+        const currentState = get()
+        const currentResolved = currentState.resolvedTheme
         const nextResolved: 'light' | 'dark' = currentResolved === 'light' ? 'dark' : 'light'
-        // theme을 직접 'light' 또는 'dark'로 설정 (system이 아닌 명시적 값)
+        // 상태 업데이트 및 테마 적용
         set({ 
           theme: nextResolved,
           resolvedTheme: nextResolved 
         })
+        // DOM에 즉시 적용
         if (typeof window !== 'undefined') {
           applyTheme(nextResolved)
         }

@@ -13,8 +13,8 @@ export const label = style({
   fontWeight: typography.fontWeight.medium,
   color: colors.textPrimary,
   transition: 'color 0.3s ease',
-  // @ts-expect-error - Vanilla Extract supports :global() selector
-  ':global(.dark) &': {
+  selectors: {
+    '.dark &': {
     color: darkColors.textPrimary,
   },
 })
@@ -42,8 +42,8 @@ export const input = style({
     cursor: 'not-allowed',
     opacity: 0.6,
   },
-  // @ts-expect-error - Vanilla Extract supports :global() selector
-  ':global(.dark) &': {
+  selectors: {
+    '.dark &': {
     color: darkColors.textPrimary,
     backgroundColor: darkColors.backgroundSecondary,
     borderColor: darkColors.gray600,

@@ -32,13 +32,14 @@ export const button = styleVariants({
         backgroundColor: colors.primaryDark,
         transform: 'scale(0.98)',
       },
-      // @ts-ignore - Vanilla Extract supports :global() selector
-      ':global(.dark) &': {
-        backgroundColor: darkColors.primary,
-        ':hover': {
+      selectors: {
+        '.dark &': {
+          backgroundColor: darkColors.primary,
+        },
+        '.dark &:hover': {
           backgroundColor: darkColors.primaryDark,
         },
-        ':active': {
+        '.dark &:active': {
           backgroundColor: darkColors.primaryDark,
         },
       },
@@ -57,13 +58,14 @@ export const button = styleVariants({
         backgroundColor: colors.secondaryDark,
         transform: 'scale(0.98)',
       },
-      // @ts-ignore - Vanilla Extract supports :global() selector
-      ':global(.dark) &': {
-        backgroundColor: darkColors.secondary,
-        ':hover': {
+      selectors: {
+        '.dark &': {
+          backgroundColor: darkColors.secondary,
+        },
+        '.dark &:hover': {
           backgroundColor: darkColors.secondaryDark,
         },
-        ':active': {
+        '.dark &:active': {
           backgroundColor: darkColors.secondaryDark,
         },
       },
@@ -83,11 +85,12 @@ export const button = styleVariants({
       ':active': {
         transform: 'scale(0.98)',
       },
-      // @ts-ignore - Vanilla Extract supports :global() selector
-      ':global(.dark) &': {
-        color: darkColors.primary,
-        borderColor: darkColors.primary,
-        ':hover': {
+      selectors: {
+        '.dark &': {
+          color: darkColors.primary,
+          borderColor: darkColors.primary,
+        },
+        '.dark &:hover': {
           backgroundColor: darkColors.primary,
           color: darkColors.white,
         },
@@ -106,13 +109,14 @@ export const button = styleVariants({
       ':active': {
         backgroundColor: colors.gray200,
       },
-      // @ts-ignore - Vanilla Extract supports :global() selector
-      ':global(.dark) &': {
-        color: darkColors.textPrimary,
-        ':hover': {
+      selectors: {
+        '.dark &': {
+          color: darkColors.textPrimary,
+        },
+        '.dark &:hover': {
           backgroundColor: darkColors.gray700,
         },
-        ':active': {
+        '.dark &:active': {
           backgroundColor: darkColors.gray600,
         },
       },

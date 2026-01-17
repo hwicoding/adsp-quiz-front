@@ -13,8 +13,8 @@ export const overlay = style({
   justifyContent: 'center',
   zIndex: 1000,
   padding: spacing[4],
-  // @ts-expect-error - Vanilla Extract supports :global() selector
-  ':global(.dark) &': {
+  selectors: {
+    '.dark &': {
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
   },
 })
@@ -30,8 +30,8 @@ export const modal = style({
   flexDirection: 'column',
   overflow: 'hidden',
   transition: 'background-color 0.3s ease',
-  // @ts-expect-error - Vanilla Extract supports :global() selector
-  ':global(.dark) &': {
+  selectors: {
+    '.dark &': {
     backgroundColor: darkColors.backgroundSecondary,
   },
 })
@@ -43,8 +43,8 @@ export const header = style({
   padding: spacing[6],
   borderBottom: `1px solid ${colors.gray200}`,
   transition: 'border-color 0.3s ease',
-  // @ts-expect-error - Vanilla Extract supports :global() selector
-  ':global(.dark) &': {
+  selectors: {
+    '.dark &': {
     borderBottomColor: darkColors.gray700,
   },
 })
@@ -55,8 +55,8 @@ export const title = style({
   color: colors.textPrimary,
   margin: 0,
   transition: 'color 0.3s ease',
-  // @ts-expect-error - Vanilla Extract supports :global() selector
-  ':global(.dark) &': {
+  selectors: {
+    '.dark &': {
     color: darkColors.textPrimary,
   },
 })

@@ -11,11 +11,11 @@ export const timer = style({
   borderRadius: borderRadius.xl,
   border: `2px solid ${colors.primary}`,
   transition: 'background-color 0.3s ease, border-color 0.3s ease',
-  // @ts-expect-error - Vanilla Extract supports :global() selector
-
-  ':global(.dark) &': {
-    backgroundColor: darkColors.gray800,
-    borderColor: darkColors.primary,
+  selectors: {
+    '.dark &': {
+      backgroundColor: darkColors.gray800,
+      borderColor: darkColors.primary,
+    },
   },
 })
 
@@ -28,10 +28,10 @@ export const timeDisplay = style({
   fontWeight: typography.fontWeight.bold,
   color: colors.primary,
   transition: 'color 0.3s ease',
-  // @ts-expect-error - Vanilla Extract supports :global() selector
-
-  ':global(.dark) &': {
-    color: darkColors.primary,
+  selectors: {
+    '.dark &': {
+      color: darkColors.primary,
+    },
   },
 })
 
@@ -43,10 +43,10 @@ export const timeUnit = style({
 export const separator = style({
   color: colors.textSecondary,
   transition: 'color 0.3s ease',
-  // @ts-expect-error - Vanilla Extract supports :global() selector
-
-  ':global(.dark) &': {
-    color: darkColors.textSecondary,
+  selectors: {
+    '.dark &': {
+      color: darkColors.textSecondary,
+    },
   },
 })
 
@@ -64,12 +64,12 @@ export const controlButton = style({
     backgroundColor: colors.primary,
     color: colors.white,
   },
-  // @ts-expect-error - Vanilla Extract supports :global() selector
-
-  ':global(.dark) &': {
-    color: darkColors.primary,
-    borderColor: darkColors.primary,
-    ':hover': {
+  selectors: {
+    '.dark &': {
+      color: darkColors.primary,
+      borderColor: darkColors.primary,
+    },
+    '.dark &:hover': {
       backgroundColor: darkColors.primary,
       color: darkColors.white,
     },
