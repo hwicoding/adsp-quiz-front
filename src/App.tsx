@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-do
 import { Home } from './pages/Home/Home'
 import { Training } from './pages/Training/Training'
 import { Exam } from './pages/Exam/Exam'
+import { ExamResult } from './pages/ExamResult/ExamResult'
 import { Mypage } from './pages/Mypage/Mypage'
 import { useThemeStore } from './store/themeStore'
 import { ThemeToggle } from './components/ThemeToggle/ThemeToggle'
@@ -100,6 +101,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/training" element={<Training />} />
             <Route path="/exam" element={<Exam />} />
+            <Route path="/exam/result/:examSessionId" element={<ExamResult />} />
             <Route path="/mypage" element={<Mypage />} />
           </Routes>
         </main>

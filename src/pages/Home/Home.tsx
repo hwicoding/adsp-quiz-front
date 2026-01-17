@@ -1,7 +1,10 @@
+import { useNavigate } from 'react-router-dom'
 import * as styles from './Home.css'
 import { Button } from '../../components/Button/Button'
 
 export const Home = () => {
+  const navigate = useNavigate()
+
   return (
     <div className={styles.container}>
       <div className={styles.hero}>
@@ -27,10 +30,18 @@ export const Home = () => {
       </div>
 
       <div className={styles.actions}>
-        <Button variant="primary" size="lg">
+        <Button
+          variant="primary"
+          size="lg"
+          onClick={() => navigate('/training')}
+        >
           학습 모드 시작
         </Button>
-        <Button variant="outline" size="lg">
+        <Button
+          variant="outline"
+          size="lg"
+          onClick={() => navigate('/exam')}
+        >
           모의고사 시작
         </Button>
       </div>

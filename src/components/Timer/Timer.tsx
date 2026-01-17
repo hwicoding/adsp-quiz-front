@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import * as styles from './Timer.css'
 
 interface TimerProps {
@@ -5,9 +6,50 @@ interface TimerProps {
   isRunning?: boolean
   onPause?: () => void
   onResume?: () => void
+  onTick?: (remainingSeconds: number) => void
+  onTimeUp?: () => void
 }
 
-export const Timer = ({ seconds, isRunning = false, onPause, onResume }: TimerProps) => {
+export const Timer = ({
+  seconds,
+  isRunning = false,
+  onPause,
+  onResume,
+  onTick,
+  onTimeUp,
+}: TimerProps) => {
+  const intervalRef = useRef<number | null>(null)
+  const currentSecondsRef = useRef(seconds)
+
+  useEffect(() => {
+    currentSecondsRef.current = seconds
+  }, [seconds])
+
+  useEffect(() => {
+    if (isRunning && currentSecondsRef.current > 0) {
+      intervalRef.current = window.setInterval(() => {
+        currentSecondsRef.current -= 1
+        onTick?.(currentSecondsRef.current)
+
+        if (currentSecondsRef.current <= 0) {
+          clearInterval(intervalRef.current!)
+          onTimeUp?.()
+        }
+      }, 1000)
+    } else {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+      }
+    }
+  }, [isRunning, onTick, onTimeUp])
+
   const hours = Math.floor(seconds / 3600)
   const minutes = Math.floor((seconds % 3600) / 60)
   const secs = seconds % 60

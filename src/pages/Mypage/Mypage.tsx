@@ -1,7 +1,10 @@
+import { useNavigate } from 'react-router-dom'
 import * as styles from './Mypage.css'
 import { Button } from '../../components/Button/Button'
 
 export const Mypage = () => {
+  const navigate = useNavigate()
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -42,7 +45,9 @@ export const Mypage = () => {
         <div className={styles.resultsList}>
           <div className={styles.emptyState}>
             <p>아직 완료한 모의고사가 없습니다.</p>
-            <Button variant="primary">모의고사 시작하기</Button>
+            <Button variant="primary" onClick={() => navigate('/exam')}>
+              모의고사 시작하기
+            </Button>
           </div>
         </div>
       </div>
