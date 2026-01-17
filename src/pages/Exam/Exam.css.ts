@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css'
+import { style, globalStyle } from '@vanilla-extract/css'
 import { colors, darkColors, typography, spacing, borderRadius, breakpoints } from '../../styles/theme'
 
 export const container = style({
@@ -148,6 +148,107 @@ export const submitButton = style({
     },
     '.dark &:hover': {
       backgroundColor: '#f87171',
+    },
+  },
+})
+
+export const loading = style({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  minHeight: '400px',
+  fontSize: typography.fontSize.lg,
+  color: colors.textSecondary,
+  transition: 'color 0.3s ease',
+  selectors: {
+    '.dark &': {
+      color: darkColors.textSecondary,
+    },
+  },
+})
+
+export const error = style({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  minHeight: '400px',
+  padding: spacing[6],
+  textAlign: 'center',
+})
+
+globalStyle(`${error} h2`, {
+  fontSize: typography.fontSize['2xl'],
+  fontWeight: typography.fontWeight.bold,
+  color: colors.error,
+  marginBottom: spacing[4],
+  transition: 'color 0.3s ease',
+})
+
+globalStyle(`.dark ${error} h2`, {
+  color: darkColors.error,
+})
+
+globalStyle(`${error} p`, {
+  fontSize: typography.fontSize.base,
+  color: colors.textSecondary,
+  marginBottom: spacing[2],
+  transition: 'color 0.3s ease',
+})
+
+globalStyle(`.dark ${error} p`, {
+  color: darkColors.textSecondary,
+})
+
+globalStyle(`${error} button`, {
+  marginTop: spacing[6],
+  padding: `${spacing[3]} ${spacing[6]}`,
+  fontSize: typography.fontSize.base,
+  fontWeight: typography.fontWeight.semibold,
+  color: colors.white,
+  backgroundColor: colors.primary,
+  border: 'none',
+  borderRadius: borderRadius.md,
+  cursor: 'pointer',
+  transition: 'all 0.2s ease-in-out',
+})
+
+globalStyle(`${error} button:hover`, {
+  backgroundColor: '#2563eb',
+})
+
+globalStyle(`.dark ${error} button`, {
+  backgroundColor: darkColors.primary,
+})
+
+globalStyle(`.dark ${error} button:hover`, {
+  backgroundColor: '#3b82f6',
+})
+
+export const nextButton = style({
+  padding: `${spacing[4]} ${spacing[8]}`,
+  fontSize: typography.fontSize.lg,
+  fontWeight: typography.fontWeight.semibold,
+  color: colors.white,
+  backgroundColor: colors.primary,
+  border: 'none',
+  borderRadius: borderRadius.md,
+  cursor: 'pointer',
+  transition: 'all 0.2s ease-in-out',
+  ':hover': {
+    backgroundColor: '#2563eb',
+  },
+  ':disabled': {
+    opacity: 0.5,
+    cursor: 'not-allowed',
+  },
+  selectors: {
+    '.dark &': {
+      backgroundColor: darkColors.primary,
+    },
+    '.dark &:hover:not(:disabled)': {
+      backgroundColor: '#3b82f6',
     },
   },
 })

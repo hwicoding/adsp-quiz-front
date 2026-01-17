@@ -19,8 +19,8 @@ export interface GenerateQuizResponse {
 }
 
 export interface StartExamRequest {
-  subjectId?: string
-  questionCount?: number
+  subjectId?: number
+  quizCount?: number
 }
 
 export interface StartExamResponse {
@@ -53,6 +53,14 @@ export interface ExamResult {
     explanation?: string
   }[]
   completedAt: string
+}
+
+export interface Subject {
+  id: number
+  name: string
+  description: string | null
+  quiz_count: number | null
+  created_at: string
 }
 
 export interface ApiError {

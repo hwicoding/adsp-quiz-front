@@ -18,9 +18,13 @@ export const Exam = () => {
   const submitExamMutation = useSubmitExam()
 
   useEffect(() => {
-    if (!examSessionId && !startExamMutation.isPending && !startExamMutation.data) {
+    // examSessionId가 없고, 로딩 중이 아니며, 데이터도 없고, 에러도 없을 때만 요청
+    if (!examSessionId && !startExamMutation.isPending && !startExamMutation.data && !startExamMutation.isError) {
       startExamMutation.mutate(
-        { questionCount: 50 },
+        { 
+          subjectId: 1,
+          quizCount: 10 
+        },
         {
           onSuccess: (data) => {
             startExam(data.examSessionId)
@@ -29,7 +33,7 @@ export const Exam = () => {
         }
       )
     }
-  }, [examSessionId, startExamMutation.isPending, startExamMutation.data])
+  }, [examSessionId, startExamMutation.isPending, startExamMutation.data, startExamMutation.isError, startExam, start])
 
   useEffect(() => {
     if (!isRunning || seconds <= 0) return
@@ -112,11 +116,68 @@ export const Exam = () => {
   }
 
   if (startExamMutation.isError) {
+    const error = startExamMutation.error as { message?: string; code?: string; details?: unknown }
+    const statusCode = error.code || ''
+    const isServerError = statusCode.includes('500') || statusCode.includes('HTTP_500')
+    const isNotFound = statusCode.includes('404') || statusCode.includes('HTTP_404')
+    const isBadRequest = statusCode.includes('400') || statusCode.includes('HTTP_400')
+    const isValidationError = statusCode.includes('422') || statusCode.includes('HTTP_422')
+    
     return (
       <div className={styles.container}>
         <div className={styles.error}>
-          시험 시작 중 오류가 발생했습니다.
-          <button onClick={() => window.location.reload()}>다시 시도</button>
+          <h2>시험 시작 중 오류가 발생했습니다</h2>
+          {isNotFound ? (
+            <>
+              <p>요청한 과목을 찾을 수 없습니다.</p>
+              <p style={{ fontSize: '0.9em', marginTop: '0.5em' }}>
+                {error.message || '과목 ID를 확인해주세요.'}
+              </p>
+              <p style={{ fontSize: '0.85em', marginTop: '0.5em', color: '#666' }}>
+                현재 사용 중인 과목 ID: 1
+              </p>
+            </>
+          ) : isBadRequest ? (
+            <>
+              <p>요청한 문제 개수를 생성할 수 없습니다.</p>
+              <p style={{ fontSize: '0.9em', marginTop: '0.5em' }}>
+                {error.message || '문제 개수를 줄이거나 다른 과목을 선택해주세요.'}
+              </p>
+              {error.message && error.message.includes('현재:') && (
+                <p style={{ fontSize: '0.85em', marginTop: '0.5em', color: '#666' }}>
+                  {error.message.match(/현재: \d+개/)?.[0] || ''}
+                </p>
+              )}
+              <p style={{ fontSize: '0.85em', marginTop: '0.5em', color: '#666' }}>
+                현재 요청한 문제 개수: 10개
+              </p>
+            </>
+          ) : isValidationError ? (
+            <>
+              <p>요청 데이터에 문제가 있습니다.</p>
+              <p style={{ fontSize: '0.9em', marginTop: '0.5em' }}>
+                {error.message || '필수 필드를 확인해주세요.'}
+              </p>
+            </>
+          ) : isServerError ? (
+            <>
+              <p>서버 내부 오류가 발생했습니다.</p>
+              <p style={{ fontSize: '0.9em', marginTop: '0.5em' }}>
+                오류 코드: {error.code || '500'}
+              </p>
+              <p style={{ fontSize: '0.85em', marginTop: '0.5em' }}>
+                잠시 후 다시 시도해주세요.
+              </p>
+            </>
+          ) : (
+            <p>{error.message || '알 수 없는 오류가 발생했습니다.'}</p>
+          )}
+          <button onClick={() => {
+            startExamMutation.reset()
+            window.location.reload()
+          }}>
+            다시 시도
+          </button>
         </div>
       </div>
     )
